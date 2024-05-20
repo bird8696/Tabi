@@ -4,7 +4,7 @@ import os
 import requests
 
 # OpenAI API 키
-OPENAI_API_KEY = "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"
+OPENAI_API_KEY = ""
 
 # Pygame 초기화
 pygame.init()
@@ -14,10 +14,10 @@ screen = pygame.display.set_mode((646, 394))
 pygame.display.set_caption("Visual Novel Chat UI")
 
 # 합성된 배경 이미지 로드
-combined_image = pygame.image.load("Tabi.png")  # 이미지 파일 이름을 적절히 수정하세요.
+combined_image = pygame.image.load("Tabi.png")  # 이미지 파일 이름을 적절히 ss수정하세요.
 
 # 폰트 설정
-font_path = 'c:\\Windows\\Fonts\\H2SA1M.TTF'  # 한글 폰트 파일 경로
+font_path = "c:\\Windows\\Fonts\\H2SA1M.TTF"  # 한글 폰트 파일 경로
 font_character = pygame.font.Font(font_path, 40)  # 캐릭터 이름 폰트 설정
 font_chat = pygame.font.Font(font_path, 18)  # 대화 내용 폰트 설정
 
@@ -36,6 +36,7 @@ button_rect = button_image.get_rect(center=(570, 366))
 # 대화 내용 저장
 chat_history = []
 
+
 # 캐릭터 이름 표시
 def draw_character_name():
     sky_blue = (15, 206, 235)  # 스카이블루 색상 코드
@@ -53,6 +54,7 @@ def draw_character_name():
         2,
     )
 
+
 # 대화창
 def draw_input_box():
     if active:
@@ -63,6 +65,7 @@ def draw_input_box():
     text_surface = font_character.render(user_text, True, (255, 255, 255))
     screen.blit(text_surface, (input_rect.x + 5, input_rect.y + 5))
 
+
 # 대화 내용 출력
 def draw_chat_history():
     start_y = 270  # 출력 시작 위치를 조정하여 입력 창 위에 표시
@@ -72,11 +75,16 @@ def draw_chat_history():
         # 대화 내용을 출력할 사각형 영역을 생성합니다.
         chat_surface = pygame.Surface((436, 22))
         chat_surface.fill((15, 15, 45))  # 딥 블루 색상으로 채웁니다.
-        screen.blit(chat_surface, (105, start_y))  # 딥 블루 색상의 사각형을 화면에 표시합니다.
-        
+        screen.blit(
+            chat_surface, (105, start_y)
+        )  # 딥 블루 색상의 사각형을 화면에 표시합니다.
+
         text_surface = font_chat.render(message, True, (255, 255, 255))
-        screen.blit(text_surface, (110, start_y + 2))  # 대화 내용을 흰색으로 출력합니다.
+        screen.blit(
+            text_surface, (110, start_y + 2)
+        )  # 대화 내용을 흰색으로 출력합니다.
         start_y += 24  # 새 메시지를 위로 추가 (위에서 아래로 출력)
+
 
 # OpenAI API 요청 함수
 def request_openai_api(input_text):
@@ -95,6 +103,7 @@ def request_openai_api(input_text):
         return response.json()["choices"][0]["text"]
     else:
         return "Error: Unable to generate response."
+
 
 # 게임 루프
 while True:
